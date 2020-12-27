@@ -12,10 +12,6 @@ save_maps_images(earthquakes_detected)
 
 log = open("log.txt", "a+")
 
-def login():
-    cl = Client()
-    cl.login(ACCOUNT_USERNAME, ACCOUNT_PASSWORD)
-
 
 # Get all of the earthquakes detected (magnitude => 3.0)
 json_file_detected = open('earthquakes_detected.json')
@@ -37,17 +33,18 @@ for earthquake_id, earthquake_info in earthquakes_detected.items():
 
 
 if new_earthquakes_to_post:
-    # we can login
-    login()
+    # login
+    cl = Client()
+    cl.login(ACCOUNT_USERNAME, ACCOUNT_PASSWORD)
 
     count = 0
     for earthquake_id, earthquake_info in new_earthquakes_to_post.items():
         description_earthquake = f"""\nLokasyon : {earthquake_info['location']}\nŞiddet : {earthquake_info['magnitude']}\nDerinlik : {earthquake_info['depth']}\nTarih - Saat : {earthquake_info['date']} - {earthquake_info['time']}"""
 
-        # PATH = f'{PATH_JPG}/{earthquake_id}.jpg'
+        PATH = f'{PATH_JPG}/{earthquake_id}.jpg'
 
-        # cl.photo_upload(PATH,
-        #                 caption=description_earthquake)
+        cl.photo_upload(PATH,                 
+                        caption=description_earthquake)
 
         with open("earthquakes_posted.json", "r+") as file:
             data = json.load(file)
