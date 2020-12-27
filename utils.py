@@ -7,7 +7,7 @@ import os
 import datetime
 
 # intern package
-from config import mapbox_api_key, url_api_backend, PATH_PNG, earthquakes_detected_path
+from config import mapbox_api_key, url_api_backend, PATH_PNG, PATH_JPG, earthquakes_detected_path
 
 # to create an id unique, we will use the date, time and magnitude concataneted without punctuation
 exclude = string.punctuation
@@ -45,7 +45,7 @@ def genereate_earthquakes_images(earthquake_id, earthquake_detail, mapbox_api_ke
     all_png_files = [os.path.basename(image_file).split(".png")[0] for image_file in glob.glob(f"{PATH_PNG}/*.png")]
 
     if earthquake_id not in all_png_files:
-        img = open(f"img/png/{earthquake_id}.png","wb")
+        img = open(f"{PATH_PNG}/{earthquake_id}.png","wb")
         
 
         ACCESS_TOKEN = mapbox_api_key
@@ -60,10 +60,10 @@ def genereate_earthquakes_images(earthquake_id, earthquake_detail, mapbox_api_ke
         img.close()
 
         # Load .png image
-        image = cv2.imread(f'img/png/{earthquake_id}.png')
+        image = cv2.imread(f'{PATH_PNG}/{earthquake_id}.png')
 
         # Save .jpg image
-        cv2.imwrite(f'img/jpg/{earthquake_id}.jpg', image, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
+        cv2.imwrite(f'{PATH_JPG}/{earthquake_id}.jpg', image, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
 
         return True
     
