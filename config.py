@@ -17,5 +17,5 @@ PATH_PNG = ""
 earthquakes_detected_path = ""
 earthquakes_posted_path = ""
 
-# hashtag
-hashtag = "#DEPREM #depremneredeoldu #türkiyedeprem #kandilli"
+# configure your hashtag 
+hashtag = ""
