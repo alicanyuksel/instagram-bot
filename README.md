@@ -2,7 +2,7 @@
 
 To do this, I used the following repository : [instagrapi](https://github.com/adw0rd/instagrapi)
 
-The goal of this project is to post earthquakes photos captured on Instagram with the details like location, magnitude, depth, etc. 
+The goal of this project is to post earthquakes photos captured with **MapBox** on Instagram with the details like location, magnitude, depth, etc. 
 
 This is a personal project and it's coded with our configuration. 
 
