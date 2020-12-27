@@ -83,8 +83,8 @@ def save_maps_images(earthquakes_detected):
             if result:
                 count+=1
 
-    if count > 0:
-        log.write(f"{count} new images created ! - {datetime.datetime.now()}\n")
+    
+    log.write(f"{count} new images created ! - {datetime.datetime.now()}\n")
 
 
 
