@@ -59,7 +59,4 @@ if new_earthquakes_to_post:
         
     log.write(f"{count} file posted ! - {datetime.datetime.now()}\n")
 
-else:
-    log.write(f"Nothing to post ! - {datetime.datetime.now()}\n")
-
 
