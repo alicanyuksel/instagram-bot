@@ -38,7 +38,7 @@ if new_earthquakes_to_post:
     cl.login(ACCOUNT_USERNAME, ACCOUNT_PASSWORD)
 
     count = 0
-    for earthquake_id, earthquake_info in new_earthquakes_to_post.items():
+    for earthquake_id, earthquake_info in reversed(new_earthquakes_to_post.items()):
         description_earthquake = f"""\nLokasyon : {earthquake_info['location']}\nŞiddet : {earthquake_info['magnitude']}\nDerinlik : {earthquake_info['depth']}\nTarih - Saat : {earthquake_info['date']} - {earthquake_info['time']}"""
 
         PATH = f'{PATH_JPG}/{earthquake_id}.jpg'
