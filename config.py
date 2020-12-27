@@ -11,3 +11,8 @@ ACCOUNT_PASSWORD = ""
 
 PATH_JPG = ""
 PATH_PNG = ""
+
+# json file
+
+earthquakes_detected = ""
+earthquakes_posted = ""

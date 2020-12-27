@@ -19,8 +19,8 @@ data = requests.get(url_api_backend).json()
 log = open("log.txt", "a+")
 
 
-def create_json(dictionary, json_file_name):
-    with open(f"{json_file_name}.json", "w") as fl:  
+def create_json(dictionary):
+    with open(f"{earthquakes_detected}, "w") as fl:  
         json_object = json.dump(dictionary, fl, indent = 4)
 
 
@@ -35,7 +35,7 @@ def detect_earthquakes(data):
             earthquakes_detected[earthquake_id] = earthquake
 
 
-    create_json(dictionary=earthquakes_detected, json_file_name="earthquakes_detected")
+    create_json(dictionary=earthquakes_detected)
 
     return earthquakes_detected
     
