@@ -3,7 +3,14 @@ import json
 import datetime
 
 # intern package
-from config import ACCOUNT_USERNAME, ACCOUNT_PASSWORD, PATH_JPG, earthquakes_detected_path, earthquakes_posted_path
+from config import (
+    ACCOUNT_USERNAME,
+    ACCOUNT_PASSWORD, 
+    PATH_JPG, 
+    earthquakes_detected_path, 
+    earthquakes_posted_path,
+    hashtag
+)
 from utils import *
 
 earthquakes_detected = detect_earthquakes(data)
@@ -39,7 +46,7 @@ if new_earthquakes_to_post:
 
     count = 0
     for earthquake_id, earthquake_info in reversed(list(new_earthquakes_to_post.items())):
-        description_earthquake = f"""\nLokasyon : {earthquake_info['location']}\nŞiddet : {earthquake_info['magnitude']}\nDerinlik : {earthquake_info['depth']}\nTarih - Saat : {earthquake_info['date']} - {earthquake_info['time']}"""
+        description_earthquake = f"""\nLokasyon : {earthquake_info['location']}\nŞiddet : {earthquake_info['magnitude']}\nDerinlik : {earthquake_info['depth']}\nTarih - Saat : {earthquake_info['date']} - {earthquake_info['time']\n\n{hashtag}}"""
 
         PATH = f'{PATH_JPG}/{earthquake_id}.jpg'
 
