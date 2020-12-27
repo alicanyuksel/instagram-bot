@@ -3,7 +3,7 @@ import json
 import datetime
 
 # intern package
-from config import ACCOUNT_USERNAME, ACCOUNT_PASSWORD, PATH_JPG, earthquakes_detected, earthquakes_posted
+from config import ACCOUNT_USERNAME, ACCOUNT_PASSWORD, PATH_JPG, earthquakes_detected_path, earthquakes_posted_path
 from utils import *
 
 earthquakes_detected = detect_earthquakes(data)
@@ -14,11 +14,11 @@ log = open("log.txt", "a+")
 
 
 # Get all of the earthquakes detected (magnitude => 3.0)
-json_file_detected = open(earthquakes_detected)
+json_file_detected = open(earthquakes_detected_path)
 earthquakes_detected = json.load(json_file_detected)
 
 # Get all of the earthquakes already posted on instagram
-json_file_posted = open(earthquakes_posted)
+json_file_posted = open(earthquakes_posted_path)
 earthquakes_posted = json.load(json_file_posted)
 
 
@@ -46,7 +46,7 @@ if new_earthquakes_to_post:
         cl.photo_upload(PATH,                 
                         caption=description_earthquake)
 
-        with open(earthquakes_posted, "r+") as file:
+        with open(earthquakes_posted_path, "r+") as file:
             data = json.load(file)
             data.update({earthquake_id : earthquake_info})
             file.seek(0)

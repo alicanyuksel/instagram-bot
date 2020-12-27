@@ -14,5 +14,5 @@ PATH_PNG = ""
 
 # json file
 
-earthquakes_detected = ""
-earthquakes_posted = ""
+earthquakes_detected_path = ""
+earthquakes_posted_path = ""

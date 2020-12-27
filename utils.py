@@ -7,7 +7,7 @@ import os
 import datetime
 
 # intern package
-from config import mapbox_api_key, url_api_backend, PATH_PNG, earthquakes_detected
+from config import mapbox_api_key, url_api_backend, PATH_PNG, earthquakes_detected_path
 
 # to create an id unique, we will use the date, time and magnitude concataneted without punctuation
 exclude = string.punctuation
@@ -20,7 +20,7 @@ log = open("log.txt", "a+")
 
 
 def create_json(dictionary):
-    with open(earthquakes_detected, "w") as fl:  
+    with open(earthquakes_detected_path, "w") as fl:  
         json_object = json.dump(dictionary, fl, indent = 4)
 
 
