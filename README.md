@@ -6,7 +6,7 @@ The goal of this project is to post earthquakes photos captured with **MapBox** 
 
 This is a personal project and it's coded with our configuration. 
 
-**There are non commercial purposes.**
+**There are no commercial purposes.**
 
 ### Requirements
 
