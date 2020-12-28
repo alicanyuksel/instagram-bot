@@ -1,5 +1,4 @@
 from instagrapi import Client
-from instagrapi.types import Location
 import json
 import datetime
 
@@ -41,23 +40,18 @@ for earthquake_id, earthquake_info in earthquakes_detected.items():
 
 
 if new_earthquakes_to_post:
-    # login
+    #login
     cl = Client()
     cl.login(ACCOUNT_USERNAME, ACCOUNT_PASSWORD)
 
     count = 0
     for earthquake_id, earthquake_info in reversed(list(new_earthquakes_to_post.items())):
-        description_earthquake = f"""\nLokasyon : {earthquake_info['location']}\nŞiddet : {earthquake_info['magnitude']}\nDerinlik : {earthquake_info['depth']}\nTarih - Saat : {earthquake_info['date']} - {earthquake_info['time']}\n\nTam konum eklenmiştir.\nDaha fazla detay için : depremneredeoldu.com\n\n{hashtag}"""
+        description_earthquake = f"""\nLokasyon : {earthquake_info['location']}\nŞiddet : {earthquake_info['magnitude']}\nDerinlik : {earthquake_info['depth']}\nTarih - Saat : {earthquake_info['date']} - {earthquake_info['time']}\n\nDaha fazla detay için : depremneredeoldu.com\n\n{hashtag}"""
 
         PATH = f'{PATH_JPG}/{earthquake_id}.jpg'
 
         cl.photo_upload(PATH,                 
-                        caption=description_earthquake,
-                        location=Location(
-                            lat=earthquake_info['latitude'],
-                            lng=earthquake_info['longitude'],
-                            name=earthquake_info['location'])
-                        )
+                        caption=description_earthquake)
 
         with open(earthquakes_posted_path, "r+") as file:
             data = json.load(file)
