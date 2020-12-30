@@ -52,7 +52,7 @@ def genereate_earthquakes_images(earthquake_id, earthquake_detail, mapbox_api_ke
         latitude = earthquake_detail["latitude"]
         longitude = earthquake_detail["longitude"]
 
-        ICON_URL = 'https%3A%2F%2Fdepremneredeoldu.com%2Ffavicon%2Fandroid-chrome-192x192.png'
+        ICON_URL = 'https%3A%2F%2Fdepremneredeoldu.com%2Fassets%2Ffavicon%2Fandroid-chrome-192x192.png'
 
         path = f"https://api.mapbox.com/styles/v1/mapbox/dark-v10/static/url-{ICON_URL}({longitude},{latitude})/{longitude},{latitude},6.5,0.00,0.00/1000x600@2x?access_token={ACCESS_TOKEN}"
 
