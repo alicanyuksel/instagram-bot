@@ -44,6 +44,9 @@ if new_earthquakes_to_post:
     cl = Client()
     cl.login(ACCOUNT_USERNAME, ACCOUNT_PASSWORD)
 
+    # set timeout 
+    cl.request_timeout = 5
+
     count = 0
     for earthquake_id, earthquake_info in reversed(list(new_earthquakes_to_post.items())):
         description_earthquake = f"""\nLokasyon : {earthquake_info['location']}\nŞiddet : {earthquake_info['magnitude']}\nDerinlik : {earthquake_info['depth']}\nTarih - Saat : {earthquake_info['date']} - {earthquake_info['time']}\n\nDaha fazla detay için : depremneredeoldu.com\n\n{hashtag}"""
