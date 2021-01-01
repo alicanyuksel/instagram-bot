@@ -40,8 +40,28 @@ for earthquake_id, earthquake_info in earthquakes_detected.items():
 
 
 if new_earthquakes_to_post:
+    # device settings
+    settings = {'uuids': {'phone_id': 'f08ac5d5-a18f-4699-9fbc-6922343b7d63',
+                'uuid': 'e3f9dfa5-b748-4d5d-88a6-08cc9148faab',
+                'client_session_id': '03b01d51-9c40-40f6-acd1-780d45c1603e',
+                'advertising_id': '1bcbc91b-60f3-471a-ab0f-5a2058685f33',
+                'device_id': 'android-1dd69f505b6b0a99'},
+                'cookies': {},
+                'last_login': None,
+                'device_settings': {'app_version': '105.0.0.18.119',
+                'android_version': 28,
+                'android_release': '9.0',
+                'dpi': '640dpi',
+                'resolution': '1440x2560',
+                'manufacturer': 'samsung',
+                'device': 'SM-G965F',
+                'model': 'star2qltecs',
+                'cpu': 'samsungexynos9810',
+                'version_code': '168361634'},
+                'user_agent': 'Instagram 105.0.0.18.119 Android (28/9.0; 640dpi; 1440x2560; samsung; SM-G965F; star2qltecs; samsungexynos9810; en_US; 168361634)'}
+
     #login
-    cl = Client()
+    cl = Client(settings=settings)
     cl.login(ACCOUNT_USERNAME, ACCOUNT_PASSWORD)
 
     # set dns
