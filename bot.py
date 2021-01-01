@@ -44,6 +44,9 @@ if new_earthquakes_to_post:
     cl = Client()
     cl.login(ACCOUNT_USERNAME, ACCOUNT_PASSWORD)
 
+    # set dns
+    cl.set_proxy("socks5://127.0.0.1:30235")
+
     # set timeout 
     cl.request_timeout = 5
 
