@@ -20,6 +20,7 @@ save_maps_images(earthquakes_detected)
 
 log = open("log.txt", "a+")
 
+logging.basicConfig(filename='log_bot.log')
 
 # Get all of the earthquakes detected (magnitude => 3.0)
 json_file_detected = open(earthquakes_detected_path)
@@ -43,12 +44,12 @@ for earthquake_id, earthquake_info in earthquakes_detected.items():
 if new_earthquakes_to_post:
     #login
     cl = Client()
+    cl.login(ACCOUNT_USERNAME, ACCOUNT_PASSWORD)
+
 
     # logging 
     cl.request_logger = logging.getLogger("private_request")
     
-    cl.login(ACCOUNT_USERNAME, ACCOUNT_PASSWORD)
-
     # set timeout 
     cl.request_timeout = 5
 
