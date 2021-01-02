@@ -1,5 +1,5 @@
 mapbox_api_key = "" # API KEY FOR MAPBOX
-url_api_backend = "" # Our API
+url_api_backend = "https://api.depremneredeoldu.com/earthquakes" # Our API
 
 # instagram username and password 
 
