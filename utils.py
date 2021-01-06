@@ -27,7 +27,8 @@ def create_json(dictionary):
 def detect_earthquakes(data):
     earthquakes_detected = {}
     for earthquake in data["earthquakes"]:
-        if float(earthquake["magnitude"]) >= 3.0:
+        # we filter the earthquakes with magnitude equal or greater than 3.5
+        if float(earthquake["magnitude"]) >= 3.5:
             date_time_magnitude = f"{earthquake['date']}-{earthquake['time']}-{earthquake['magnitude']}"
 
             earthquake_id = "".join([ch for ch in date_time_magnitude if ch not in exclude])
