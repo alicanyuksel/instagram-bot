@@ -8,26 +8,32 @@ from config import (
     ACCOUNT_USERNAME,
     ACCOUNT_PASSWORD, 
     PATH_JPG, 
-    earthquakes_detected_path, 
-    earthquakes_posted_path,
+    JSON_PATH, 
     hashtag
 )
 from utils import *
 
+
+# detect the earthquakes and save them into json file
 earthquakes_detected = detect_earthquakes(data)
+
+# save maps generated from MapBox API
 save_maps_images(earthquakes_detected)
 
-
+# create the log files
 log = open("log.txt", "a+")
-
 logging.basicConfig(filename='log_bot.log')
 
 # Get all of the earthquakes detected (magnitude => 3.0)
-json_file_detected = open(earthquakes_detected_path)
+json_file_detected = open(JSON_PATH["earthquakes_detected"], "r")
 earthquakes_detected = json.load(json_file_detected)
 
+# Create a json file to store the earthquakes posted on our account
+if not os.path.exists(JSON_PATH["earthquakes_posted"]):
+    create_json(dictionary={}, path=JSON_PATH["earthquakes_posted"])
+
 # Get all of the earthquakes already posted on instagram
-json_file_posted = open(earthquakes_posted_path)
+json_file_posted = open(JSON_PATH["earthquakes_posted"])
 earthquakes_posted = json.load(json_file_posted)
 
 
@@ -49,21 +55,19 @@ if new_earthquakes_to_post:
     # logging 
     cl.request_logger = logging.getLogger("private_request")
     
-   
-
     count = 0
     for earthquake_id, earthquake_info in reversed(list(new_earthquakes_to_post.items())):
         description_earthquake = f"""\nLokasyon : {earthquake_info['location']}\nBüyüklük : {earthquake_info['magnitude']}\nDerinlik : {earthquake_info['depth']}\nTarih - Saat : {earthquake_info['date']} - {earthquake_info['time']}\n\nDaha fazla detay için : depremneredeoldu.com\n\n{hashtag}"""
 
         PATH = f'{PATH_JPG}/{earthquake_id}.jpg'
 
-         # set timeout 
+        # set timeout 
         cl.request_timeout = 5
 
         cl.photo_upload(PATH,                 
                         caption=description_earthquake)
 
-        with open(earthquakes_posted_path, "r+") as file:
+        with open(JSON_PATH["earthquakes_posted"], "r+") as file:
             data = json.load(file)
             data.update({earthquake_id : earthquake_info})
             file.seek(0)
@@ -72,5 +76,3 @@ if new_earthquakes_to_post:
         count += 1
         
     log.write(f"{count} file posted ! - {datetime.datetime.now()}\n")
-
-
