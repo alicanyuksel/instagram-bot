@@ -7,7 +7,7 @@ import os
 import datetime
 
 # intern package
-from config import mapbox_api_key, url_api_backend, PATH_PNG, PATH_JPG, earthquakes_detected_path
+from config import mapbox_api_key, url_api_backend, PATH_PNG, PATH_JPG, JSON_PATH
 
 # to create an id unique, we will use the date, time and magnitude concataneted without punctuation
 exclude = string.punctuation
@@ -19,9 +19,20 @@ data = requests.get(url_api_backend).json()
 log = open("log.txt", "a+")
 
 
-def create_json(dictionary):
-    with open(earthquakes_detected_path, "w") as fl:  
+def create_json(dictionary, path):
+    with open(path, "w") as fl:  
         json_object = json.dump(dictionary, fl, indent = 4)
+
+
+
+def safe_open(path, mode):
+    """
+    To create the directory if it doesnt exist.
+    """
+
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    return open(path, mode)
+
 
 
 def detect_earthquakes(data):
@@ -36,7 +47,7 @@ def detect_earthquakes(data):
             earthquakes_detected[earthquake_id] = earthquake
 
 
-    create_json(dictionary=earthquakes_detected)
+    create_json(dictionary=earthquakes_detected, path=JSON_PATH["earthquakes_detected"])
 
     return earthquakes_detected
     
@@ -46,7 +57,7 @@ def genereate_earthquakes_images(earthquake_id, earthquake_detail, mapbox_api_ke
     all_png_files = [os.path.basename(image_file).split(".png")[0] for image_file in glob.glob(f"{PATH_PNG}/*.png")]
 
     if earthquake_id not in all_png_files:
-        img = open(f"{PATH_PNG}/{earthquake_id}.png","wb")
+        img = safe_open(f"{PATH_PNG}/{earthquake_id}.png","wb")
         
 
         ACCESS_TOKEN = mapbox_api_key
@@ -72,6 +83,7 @@ def genereate_earthquakes_images(earthquake_id, earthquake_detail, mapbox_api_ke
         return False
 
 
+
 def save_maps_images(earthquakes_detected):
     count = 0
     for key, earthquake_info in earthquakes_detected.items():
@@ -86,12 +98,3 @@ def save_maps_images(earthquakes_detected):
 
     if count > 0:
         log.write(f"{count} new images created ! - {datetime.datetime.now()}\n")
-
-
-
-
-
-
-
-
-
