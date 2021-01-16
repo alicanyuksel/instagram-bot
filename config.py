@@ -1,22 +1,23 @@
-mapbox_api_key = "" # API KEY FOR MAPBOX
-url_api_backend = "https://api.depremneredeoldu.com/earthquakes" # Our API
+mapbox_api_key = "" # YOUR TOKEN ACCESS
+url_api_backend = "https://api.depremneredeoldu.com/earthquakes"
 
 # instagram username and password 
-ACCOUNT_USERNAME = ""
-ACCOUNT_PASSWORD = ""
+
+ACCOUNT_USERNAME = "" # YOUR USERNAME
+ACCOUNT_PASSWORD = "" # YOUR PASSWORD
+
  
+# define path
 
-# paths to save the images
-# you can put "./" in local but in server, you have to put the entire path
+PATH_JPG = './img/jpg'
+PATH_PNG = './img/png'
 
-PATH_JPG = ""
-PATH_PNG = ""
+# path json
 
-# json file
-# idem for the path
+JSON_PATH = {
+    "earthquakes_detected" : "./earthquakes_detected.json",
+    "earthquakes_posted" : "./earthquakes_posted.json"
+}
 
-earthquakes_detected_path = ""
-earthquakes_posted_path = ""
-
-# configure the hashtags for your posts
-hashtag = ""
+# configure your hashtag 
+hashtag = '#deprem #depremneredeoldu #türkiyedeprem #kandilli'
