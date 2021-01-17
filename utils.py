@@ -86,8 +86,10 @@ def genereate_earthquakes_images(earthquake_id, earthquake_detail, mapbox_api_ke
 
 def save_maps_images(earthquakes_detected):
     # create the images path
-    os.makedirs(PATH_PNG)
-    os.makedirs(PATH_JPG)
+    if not os.path.exists(PATH_PNG):
+        os.makedirs(PATH_PNG)
+    elif not os.path.exists(PATH_JPG):
+        os.makedirs(PATH_JPG)
 
     count = 0
     for key, earthquake_info in earthquakes_detected.items():
