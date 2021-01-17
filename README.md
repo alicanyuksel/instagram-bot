@@ -21,11 +21,11 @@ To test our bot, you should change the config file by adding:
 
 - Your Instagram account (username and password)
 
-- Path for images that will be generated
+- Path for images that will be generated (optional)
 
-- Path for json file that will store the earthquakes detected and posted
+- Path for json file that will store the earthquakes detected and posted (optional)
 
-- You can put your hashtags if you want
+- You can put your hashtags if you want (optional)
 
 
 ### To run
