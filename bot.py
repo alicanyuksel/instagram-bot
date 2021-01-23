@@ -49,6 +49,8 @@ if new_earthquakes_to_post:
     cl = Client()
     cl.login(ACCOUNT_USERNAME, ACCOUNT_PASSWORD)
 
+    cl.request_timeout = 5
+
     # logging 
     cl.request_logger = logging.getLogger("private_request")
 
@@ -61,6 +63,7 @@ if new_earthquakes_to_post:
         # set timeout 
         cl.request_timeout = 5
 
+        # upload photo
         cl.photo_upload(PATH,
                         caption=description_earthquake)
 
