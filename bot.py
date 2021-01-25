@@ -61,7 +61,7 @@ if new_earthquakes_to_post:
         PATH = f'{PATH_JPG}/{earthquake_id}.jpg'
 
         # set timeout 
-        cl.request_timeout = 5
+        cl.request_timeout = 10
 
         # upload photo
         cl.photo_upload(PATH,
