@@ -1,0 +1,16 @@
+version: 2
+updates:
+- package-ecosystem: pip
+  directory: "/"
+  schedule:
+    interval: weekly
+    time: "04:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: instagrapi
+    versions:
+    - 1.5.8
+    - 1.6.1
+  - dependency-name: requests
+    versions:
+    - 2.25.1
