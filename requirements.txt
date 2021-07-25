@@ -5,7 +5,7 @@ instagrapi==1.6.3
 install==1.3.4
 numpy==1.20.3
 opencv-python==4.5.1.48
-Pillow==8.2.0
+Pillow==8.3.1
 pycryptodomex==3.10.1
 pydantic==1.8.2
 PySocks==1.7.1
