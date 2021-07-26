@@ -1,17 +1,20 @@
 from config import (
     DB_PATH,
     ICON_URL,
-    ACCESS_TOKEN,
     PATH_JPG_IMAGES,
-    ACCOUNT_USERNAME,
-    ACCOUNT_PASSWORD,
     HASHTAG
 )
 import json
 import requests
-import cv2
 import os
 from instagrapi import Client
+
+from dotenv import load_dotenv
+load_dotenv()
+
+ACCESS_TOKEN = os.getenv('ACCESS_TOKEN')
+ACCOUNT_USERNAME = os.getenv('ACCOUNT_USERNAME')
+ACCOUNT_PASSWORD = os.getenv('ACCOUNT_PASSWORD')
 
 
 class Earthquake:
