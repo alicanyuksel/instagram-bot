@@ -30,7 +30,7 @@ To test our bot, you should change the config file by adding:
 
 ### To run
 
-    python bot.py
+    python run.py
 
 ## Data
 
