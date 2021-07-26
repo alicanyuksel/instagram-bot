@@ -1,4 +1,4 @@
-from utils2 import get_data, check_if_db_exists, check_if_new_earthquake_exists
+from utils import get_data, check_if_db_exists, check_if_new_earthquake_exists
 from config import DB_PATH, URL_API_BACKEND
 from earthquake import Earthquake
 import json
