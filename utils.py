@@ -1,100 +1,52 @@
 import requests
-import cv2
 import json
-import string
-import glob
 import os
-import datetime
-
-# intern package
-from config import mapbox_api_key, url_api_backend, PATH_PNG, PATH_JPG, JSON_PATH
-
-# to create an id unique, we will use the date, time and magnitude concatenated without punctuation
-exclude = string.punctuation
-
-# get the data from Deprem Nerede Oldu API
-data = requests.get(url_api_backend).json()
-
-# log file
-log = open("log.txt", "a+")
+from config import FILTER_MAGNITUDE
+from earthquake import Earthquake
 
 
-def create_json(dictionary, path):
-    with open(path, "w") as fl:
-        json_object = json.dump(dictionary, fl, indent=4)
+def get_data(url):
+    # get the data from Deprem Nerede Oldu API
+    return requests.get(url).json()
 
 
-def safe_open(path, mode):
-    """
-    To create the directory if it doesnt exist.
-    """
-
-    os.makedirs(os.path.dirname(path), exist_ok=True)
-    return open(path, mode)
+def check_if_db_exists(path: str) -> bool:
+    return os.path.isfile(path)
 
 
-def detect_earthquakes(data):
-    earthquakes_detected = {}
-    for earthquake in data["earthquakes"]:
-        # we filter the earthquakes with magnitude equal or greater than 3.5
-        if float(earthquake["magnitude"]) >= 3.5:
-            date_time_magnitude = f"{earthquake['date']}-{earthquake['time']}-{earthquake['magnitude']}"
+def filter_by_id(id, path):
+    # our database
+    db = open(path, "r")
+    data = json.load(db)
 
-            earthquake_id = "".join([ch for ch in date_time_magnitude if ch not in exclude])
+    all_earthquakes_id_posted = [item["earthquake_id"]
+                                 for item in data["earthquakes"]]
 
-            earthquakes_detected[earthquake_id] = earthquake
-
-    create_json(dictionary=earthquakes_detected, path=JSON_PATH["earthquakes_detected"])
-
-    return earthquakes_detected
-
-
-def genereate_earthquakes_images(earthquake_id, earthquake_detail, mapbox_api_key):
-    all_png_files = [os.path.basename(image_file).split(".png")[0] for image_file in glob.glob(f"{PATH_PNG}/*.png")]
-
-    if earthquake_id not in all_png_files:
-        img = safe_open(f"{PATH_PNG}/{earthquake_id}.png", "wb")
-
-        ACCESS_TOKEN = mapbox_api_key
-        latitude = earthquake_detail["latitude"]
-        longitude = earthquake_detail["longitude"]
-
-        ICON_URL = 'https%3A%2F%2Fdepremneredeoldu.com%2Fassets%2Ffavicon%2Fandroid-chrome-192x192.png'
-
-        path = f"https://api.mapbox.com/styles/v1/mapbox/dark-v10/static/url-{ICON_URL}({longitude},{latitude})/{longitude},{latitude},6.5,0.00,0.00/1000x600@2x?access_token={ACCESS_TOKEN}"
-
-        img.write(requests.get(path).content)
-        img.close()
-
-        # Load .png image
-        image = cv2.imread(f'{PATH_PNG}/{earthquake_id}.png')
-
-        # Save .jpg image
-        cv2.imwrite(f'{PATH_JPG}/{earthquake_id}.jpg', image, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
-
+    if id in all_earthquakes_id_posted:
         return True
 
-    else:
-        return False
+    return False
+
+def check_filter_magnitude(item):
+    pass
 
 
-def save_maps_images(earthquakes_detected):
-    # create the images path
-    if not os.path.exists(PATH_PNG):
-        os.makedirs(PATH_PNG)
-    elif not os.path.exists(PATH_JPG):
-        os.makedirs(PATH_JPG)
+def check_if_new_earthquake_exists(data_json, path):
+    for item in data_json["earthquakes"]:
+        result = filter_by_id(id=item["earthquake_id"], path=path)
 
-    count = 0
-    for key, earthquake_info in earthquakes_detected.items():
-        result = genereate_earthquakes_images(
-            earthquake_id=key,
-            earthquake_detail=earthquake_info,
-            mapbox_api_key=mapbox_api_key
-        )
+        # if result returns False, that means this is a new earthquake
+        # check if his magnitude is greater than 3.5
+        # and save it in the db
+    
+        if not result: #and float(item["magnitude"]) >= FILTER_MAGNITUDE:
+            earthquake = Earthquake(**item)
+            created_img_path = earthquake.genereate_earthquake_image()
+            response_instagram = earthquake.upload_photo_to_intagram(img_path=created_img_path)
+            
+            if response_instagram:
+                earthquake.save_to_db()
+                
 
-        if result:
-            count += 1
 
-    if count > 0:
-        log.write(f"{count} new images created ! - {datetime.datetime.now()}\n")
+
