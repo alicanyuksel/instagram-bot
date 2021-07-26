@@ -10,7 +10,7 @@ def run_bot(data_json, path):
         with open(path, "w") as fl:
             json_object = json.dump(data_json, fl, indent=4)
 
-    # add new earthquakes
+    # if the db exists, check if there is a new earthquake
     else:
         check_if_new_earthquake_exists(data_json=data_json, path=path)
 
