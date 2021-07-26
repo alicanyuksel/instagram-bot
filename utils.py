@@ -27,9 +27,6 @@ def filter_by_id(id, path):
 
     return False
 
-def check_filter_magnitude(item):
-    pass
-
 
 def check_if_new_earthquake_exists(data_json, path):
     for item in data_json["earthquakes"]:
@@ -38,15 +35,12 @@ def check_if_new_earthquake_exists(data_json, path):
         # if result returns False, that means this is a new earthquake
         # check if his magnitude is greater than 3.5
         # and save it in the db
-    
-        if not result: #and float(item["magnitude"]) >= FILTER_MAGNITUDE:
+
+        if not result:  # and float(item["magnitude"]) >= FILTER_MAGNITUDE:
             earthquake = Earthquake(**item)
             created_img_path = earthquake.genereate_earthquake_image()
-            response_instagram = earthquake.upload_photo_to_intagram(img_path=created_img_path)
-            
+            response_instagram = earthquake.upload_photo_to_intagram(
+                img_path=created_img_path)
+
             if response_instagram:
                 earthquake.save_to_db()
-                
-
-
-
