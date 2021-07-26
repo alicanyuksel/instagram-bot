@@ -39,17 +39,17 @@ class Earthquake:
         }
 
     def save_to_db(self, db_path=DB_PATH):
-        with open(DB_PATH, 'r+') as file:
+        with open(db_path, 'r+') as file:
             # First we load existing database into a dict.
             db = json.load(file)
 
-            # Join new_data with file_data inside emp_details
+            # Join new_data
             db["earthquakes"].append(self.json())
 
             # Sets file's current position at offset.
             file.seek(0)
 
-            # convert back to json.
+            # convert back to json
             json.dump(db, file, indent=4)
 
     def genereate_earthquake_image(self, path_png=PATH_JPG_IMAGES):
@@ -63,12 +63,6 @@ class Earthquake:
         img.write(requests.get(path).content)
         img.close()
 
-        # Load .png image
-        #image = cv2.imread(f'{PATH_PNG_IMAGES}/{self.earthquake_id}.png')
-
-        # Save .jpg image
-        #cv2.imwrite(f'{PATH_JPG}/{earthquake_id}.jpg', image, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
-
         return img_path
 
     def upload_photo_to_intagram(self, img_path, account_username=ACCOUNT_USERNAME, account_password=ACCOUNT_PASSWORD) -> bool:
@@ -76,11 +70,14 @@ class Earthquake:
         cl = Client()
         cl.login(account_username, account_password)
 
-        cl.request_timeout = 5 #seconds
+        cl.request_timeout = 5  # seconds
 
         # description for photo
-        description_earthquake = f"""\nLokasyon : {self.location}\nBüyüklük : {self.magnitude}\nDerinlik : {self.depth}\nTarih - Saat : {self.date} - {self.time}\n\nDaha fazla detay için : depremneredeoldu.com\n\n{HASHTAG}"""
-
+        description_earthquake = f"""
+                                Lokasyon : {self.location}\nBüyüklük : {self.magnitude}\nDerinlik : {self.depth}
+                                \nTarih - Saat : {self.date} - {self.time}
+                                \n\nDaha fazla detay için : depremneredeoldu.com\n\n{HASHTAG}
+                                """
 
         # upload photo
         try:
