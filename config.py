@@ -1,23 +1,17 @@
-mapbox_api_key = "" # YOUR TOKEN ACCESS
-url_api_backend = "https://api.depremneredeoldu.com/earthquakes"
+URL_API_BACKEND = "https://api.depremneredeoldu.com/earthquakes"
 
-# instagram username and password 
-
-ACCOUNT_USERNAME = "" # YOUR USERNAME
-ACCOUNT_PASSWORD = "" # YOUR PASSWORD
-
- 
 # define path
 
-PATH_JPG = './img/jpg'
-PATH_PNG = './img/png'
+PATH_JPG_IMAGES = './img/jpg'
 
 # path json
+DB_PATH = "./earthquakes.json"
 
-JSON_PATH = {
-    "earthquakes_detected" : "./earthquakes_detected.json",
-    "earthquakes_posted" : "./earthquakes_posted.json"
-}
+# filter earthquake magnitude
+FILTER_MAGNITUDE = 3.0
+
+# DepremNeredeOldu ICON
+ICON_URL = 'https%3A%2F%2Fdepremneredeoldu.com%2Fassets%2Ffavicon%2Fandroid-chrome-192x192.png'
 
 # configure your hashtag 
-hashtag = '#deprem #depremneredeoldu #türkiyedeprem #kandilli'
+HASHTAG = '#deprem #depremneredeoldu #türkiyedeprem #kandilli'
