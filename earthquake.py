@@ -10,13 +10,16 @@ import requests
 import os
 import cv2
 from instagrapi import Client
-
+import logging
 from dotenv import load_dotenv
 load_dotenv()
 
 ACCESS_TOKEN = os.getenv('ACCESS_TOKEN')
 ACCOUNT_USERNAME = os.getenv('ACCOUNT_USERNAME')
 ACCOUNT_PASSWORD = os.getenv('ACCOUNT_PASSWORD')
+
+
+logging.basicConfig(filename='bot.log', level=logging.DEBUG)
 
 
 class Earthquake:
@@ -57,7 +60,9 @@ class Earthquake:
             # convert back to json
             json.dump(db, file, indent=4)
 
-    def genereate_earthquake_image(self, path_png=PATH_PNG_IMAGES, path_jpg=PATH_JPG_IMAGES):
+            logging.info('Data saved.')
+
+    def generate_earthquake_image(self, path_png=PATH_PNG_IMAGES, path_jpg=PATH_JPG_IMAGES):
         img_png_path = os.path.join(path_png, f"{self.earthquake_id}.png")
         os.makedirs(os.path.dirname(img_png_path), exist_ok=True)
 
@@ -74,6 +79,9 @@ class Earthquake:
         # Save .jpg image to post on Instagram (only JPG files)
         img_jpg_path = os.path.join(path_jpg, f"{self.earthquake_id}.jpg")
         cv2.imwrite(img_jpg_path, image, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
+
+        logging.info(
+            f'Earthquake image generated with id : {self.earthquake_id}')
 
         return img_jpg_path
 
@@ -95,7 +103,9 @@ class Earthquake:
         try:
             cl.photo_upload(img_path,
                             caption=description_earthquake)
+            logging.info('Generated image posted to Instagram !')
             return True
 
         except:
+            logging.warning('Some problem about the Instagram connection...')
             return False

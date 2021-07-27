@@ -38,7 +38,7 @@ def check_if_new_earthquake_exists(data_json, path):
 
         if not result and float(item["magnitude"]) >= FILTER_MAGNITUDE:
             earthquake = Earthquake(**item)
-            created_img_path = earthquake.genereate_earthquake_image()
+            created_img_path = earthquake.generate_earthquake_image()
             response_instagram = earthquake.upload_photo_to_instagram(
                 img_path=created_img_path)
 
