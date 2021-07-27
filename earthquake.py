@@ -1,12 +1,14 @@
 from config import (
     DB_PATH,
     ICON_URL,
+    PATH_PNG_IMAGES,
     PATH_JPG_IMAGES,
     HASHTAG
 )
 import json
 import requests
 import os
+import cv2
 from instagrapi import Client
 
 from dotenv import load_dotenv
@@ -55,18 +57,25 @@ class Earthquake:
             # convert back to json
             json.dump(db, file, indent=4)
 
-    def genereate_earthquake_image(self, path_png=PATH_JPG_IMAGES):
-        img_path = os.path.join(path_png, f"{self.earthquake_id}.jpg")
-        os.makedirs(os.path.dirname(img_path), exist_ok=True)
+    def genereate_earthquake_image(self, path_png=PATH_PNG_IMAGES, path_jpg=PATH_JPG_IMAGES):
+        img_png_path = os.path.join(path_png, f"{self.earthquake_id}.png")
+        os.makedirs(os.path.dirname(img_png_path), exist_ok=True)
 
-        img = open(img_path, "wb")
+        img = open(img_png_path, "wb")
 
         path = f"https://api.mapbox.com/styles/v1/mapbox/dark-v10/static/url-{ICON_URL}({self.longitude},{self.latitude})/{self.longitude},{self.latitude},6.5,0.00,0.00/1000x600@2x?access_token={ACCESS_TOKEN}"
 
         img.write(requests.get(path).content)
         img.close()
 
-        return img_path
+        # Load .png image
+        image = cv2.imread(img_png_path)
+
+        # Save .jpg image to post on Instagram (only JPG files)
+        img_jpg_path = os.path.join(path_jpg, f"{self.earthquake_id}.jpg")
+        cv2.imwrite(img_jpg_path, image, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
+
+        return img_jpg_path
 
     def upload_photo_to_instagram(self, img_path, account_username=ACCOUNT_USERNAME, account_password=ACCOUNT_PASSWORD) -> bool:
         # login

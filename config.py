@@ -2,6 +2,7 @@ URL_API_BACKEND = "https://api.depremneredeoldu.com/earthquakes"
 
 # define path
 
+PATH_PNG_IMAGES = './img/png'
 PATH_JPG_IMAGES = './img/jpg'
 
 # path json
