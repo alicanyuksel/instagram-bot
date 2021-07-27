@@ -68,7 +68,7 @@ class Earthquake:
 
         return img_path
 
-    def upload_photo_to_intagram(self, img_path, account_username=ACCOUNT_USERNAME, account_password=ACCOUNT_PASSWORD) -> bool:
+    def upload_photo_to_instagram(self, img_path, account_username=ACCOUNT_USERNAME, account_password=ACCOUNT_PASSWORD) -> bool:
         # login
         cl = Client()
         cl.login(account_username, account_password)
