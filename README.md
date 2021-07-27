@@ -2,24 +2,19 @@
 
 To do this, I used the following repository : [instagrapi](https://github.com/adw0rd/instagrapi)
 
-The goal of this project is to post earthquakes photos captured with **MapBox** on Instagram with the details like location, magnitude, depth, etc. 
+The goal of this project is to post earthquakes photos captured with **MapBox** on Instagram with the details like location, magnitude, depth, etc.
 
-This is a personal project and it's coded with our configuration. 
+This is a personal project and it's coded with our configuration.
 
 **There are no commercial purposes.**
 
-### Requirements
+## Requirements
 
     pip install -r requirements.txt
-
 
 ## Config file
 
 To test our bot, you should change the config file by adding:
-
-- Your mapbox access token (you need just sign up on **[MapBox](http://mapbox.com)**)
-
-- Your Instagram account (username and password)
 
 - Path for images that will be generated (optional)
 
@@ -27,6 +22,12 @@ To test our bot, you should change the config file by adding:
 
 - You can put your hashtags if you want (optional)
 
+## Environment variables
+
+- ACCESS_TOKEN : Your mapbox access token (you need just sign up on **[MapBox](http://mapbox.com)**)
+
+- ACCOUNT_USERNAMER, ACCOUNT_PASSWORD :
+Your Instagram account (username and password)
 
 ### To run
 
