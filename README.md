@@ -12,6 +12,10 @@ This is a personal project and it's coded with our configuration.
 
     pip install -r requirements.txt
 
+### To run
+
+    python run.py
+
 ## Config file
 
 To test our bot, you should change the config file by adding:
@@ -26,12 +30,8 @@ To test our bot, you should change the config file by adding:
 
 - ACCESS_TOKEN : Your mapbox access token (you need just sign up on **[MapBox](http://mapbox.com)**)
 
-- ACCOUNT_USERNAMER, ACCOUNT_PASSWORD :
+- ACCOUNT_USERNAME, ACCOUNT_PASSWORD :
 Your Instagram account (username and password)
-
-### To run
-
-    python run.py
 
 ## Data
 
