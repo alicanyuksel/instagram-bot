@@ -46,7 +46,13 @@ class Earthquake:
             "location": self.location,
         }
 
-    def save_to_db(self, db_path=DB_PATH):
+    def save_to_db(self, db_path: str = DB_PATH) -> None:
+        """
+        To save the earthquake in the database.
+
+        :param db_path: database path
+        :return: None
+        """
         with open(db_path, 'r+') as file:
             # First we load existing database into a dict.
             db = json.load(file)
@@ -62,7 +68,14 @@ class Earthquake:
 
             logging.info('Data saved.')
 
-    def generate_earthquake_image(self, path_png=PATH_PNG_IMAGES, path_jpg=PATH_JPG_IMAGES):
+    def generate_earthquake_image(self, path_png: str = PATH_PNG_IMAGES, path_jpg: str = PATH_JPG_IMAGES) -> str:
+        """
+        To generate earthquake images with Mapbox API in order to post it on Instagram.
+
+        :param path_png: PNG images path
+        :param path_jpg: JPG images path
+        :return: JPG images path
+        """
         img_png_path = os.path.join(path_png, f"{self.earthquake_id}.png")
         os.makedirs(os.path.dirname(img_png_path), exist_ok=True)
 
@@ -85,7 +98,18 @@ class Earthquake:
 
         return img_jpg_path
 
-    def upload_photo_to_instagram(self, img_path, account_username=ACCOUNT_USERNAME, account_password=ACCOUNT_PASSWORD) -> bool:
+    def upload_photo_to_instagram(self,
+                                  img_path: str,
+                                  account_username: str = ACCOUNT_USERNAME,
+                                  account_password: str = ACCOUNT_PASSWORD) -> bool:
+        """
+        To upload the generated image on Instagram.
+
+        :param img_path: generated image path
+        :param account_username: instagram username
+        :param account_password: instagram password
+        :return: true or false
+        """
         # login
         cl = Client()
         cl.login(account_username, account_password)

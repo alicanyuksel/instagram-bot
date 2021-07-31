@@ -1,10 +1,17 @@
-from utils import get_data, check_if_db_exists, check_if_new_earthquake_exists
+from utils import get_data, check_if_db_exists, check_if_new_earthquake_exists, filter_by_id
 from config import DB_PATH, URL_API_BACKEND
 from earthquake import Earthquake
 import json
 
 
-def run_bot(data_json, path):
+def run_bot(data_json, path: str) -> None:
+    """
+    To run the instagram bot.
+
+    :param data_json: json_data
+    :param path: database path
+    :return: None
+    """
     # to initialize the database
     if not check_if_db_exists(path=path):
         with open(path, "w") as fl:
