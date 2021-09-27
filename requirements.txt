@@ -9,7 +9,7 @@ numpy==1.21.2
 opencv-python==4.5.1.48
 Pillow==8.3.2
 pycodestyle==2.7.0
-pycryptodomex==3.10.1
+pycryptodomex==3.10.4
 pydantic==1.8.2
 PySocks==1.7.1
 python-dotenv==0.19.0
