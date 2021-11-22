@@ -3,7 +3,7 @@ certifi==2021.10.8
 chardet==4.0.0
 charset-normalizer==2.0.7
 idna==3.3
-instagrapi==1.15.15
+instagrapi==1.15.19
 install==1.3.4
 numpy==1.21.4
 opencv-python==4.5.4.58
