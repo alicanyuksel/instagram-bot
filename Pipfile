@@ -1,0 +1,33 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+autopep8 = "*"
+certifi = "*"
+chardet = "*"
+charset-normalizer = "*"
+idna = "*"
+instagrapi = "*"
+install = "*"
+numpy = "*"
+opencv-python = "*"
+pycodestyle = "*"
+pycryptodomex = "*"
+pydantic = "*"
+python-dotenv = "*"
+requests = "*"
+toml = "*"
+typing-extensions = "*"
+urllib3 = "*"
+Pillow = "*"
+PySocks = "*"
+
+[dev-packages]
+black = "*"
+pylint = "*"
+flake8 = "*"
+
+[requires]
+python_version = "3.9"
