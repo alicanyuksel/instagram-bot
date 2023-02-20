@@ -10,7 +10,7 @@ opencv-python==4.5.5.64
 Pillow==9.1.0
 pycodestyle==2.8.0
 pycryptodomex==3.14.1
-pydantic==1.9.0
+pydantic==1.10.5
 PySocks==1.7.1
 python-dotenv==0.20.0
 requests==2.27.1
